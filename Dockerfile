@@ -1,7 +1,6 @@
 FROM centos:centos6
 MAINTAINER Nicolay Hvidsten <nicohvi@gmail.com>
 
-
 RUN yum -y install sudo
 RUN  sed -i "s/Defaults    requiretty.*/ #Defaults    requiretty/g" /etc/sudoers
 
@@ -20,9 +19,6 @@ RUN curl --progress http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.3.tar.gz | 
 RUN echo 'gem: --no-rdoc --no-ri' > ~/.gemrc && \
     gem update --system && \
     gem install bundler && \
-
-# new docker-fil
-
     gem install passenger 
 
 # install passenger nginx-module
@@ -30,6 +26,7 @@ RUN /bin/bash -l -c 'passenger-install-nginx-module --auto-download --auto --pre
 
 # add nginx startup-script
 ADD nginx.sh /etc/init.d/nginx
+RUN chmod +x /etc/init.d/nginx
 
 # add the directory housing our ruby app
 RUN mkdir -p /var/www/nplol/public

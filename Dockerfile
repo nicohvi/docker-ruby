@@ -1,14 +1,6 @@
 FROM centos:centos6
 MAINTAINER Nicolay Hvidsten <nicohvi@gmail.com>
 
-# install sudp
-RUN yum -y install sudo 
-RUN useradd docker 
-RUN echo "docker:docker" | chpasswd
-RUN chmod 666 /etc/sudoers
-RUN echo "docker ALL=(ALL) ALL" >> /etc/sudoers
-RUN chmod 440 /etc/sudoers
-
 RUN mkdir -p /home/docker && chown -R docker:docker /home/docker
 
 RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
@@ -42,8 +34,8 @@ RUN mkdir -p /var/www/nplol/public
 ADD index.html /var/www/nplol/public/
 
 # setup the correct nginx.conf 
-RUN rm -v /etc/nginx/conf/nginx.conf
-ADD nginx.conf /etc/nginx/conf/
+RUN rm -v /etc/nginx/nginx.conf
+ADD nginx.conf /etc/nginx/
 
 # run nginx in the foreground
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf

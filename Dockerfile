@@ -33,7 +33,7 @@ RUN mkdir -p /var/www/nplol/public
 ADD index.html /var/www/nplol/public/
 
 # setup the correct nginx.conf 
-USERADD nginx
+RUN useradd nginx
 ADD nginx.conf /etc/nginx/
 
 # run nginx in the foreground

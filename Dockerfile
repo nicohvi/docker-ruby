@@ -3,9 +3,12 @@ MAINTAINER Nicolay Hvidsten <nicohvi@gmail.com>
 
 # install sudp
 RUN yum -y install sudo 
-RUN useradd docker
+RUN useradd docker 
 RUN echo "docker:docker" | chpasswd
-RUN adduser docker sudo
+RUN chmod 666 /etc/sudoers
+RUN echo "docker ALL=(ALL) ALL" >> /etc/sudoers
+RUN chmod 440 /etc/sudoers
+
 RUN mkdir -p /home/docker && chown -R docker:docker /home/docker
 
 RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \

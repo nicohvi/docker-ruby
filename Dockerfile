@@ -45,5 +45,3 @@ RUN chown -R app /var/www && chgrp -R app /var/www && \
     chown -R app /etc/init.d
 
 EXPOSE 80
-
-# ENTRYPOINT /etc/init.d/nginx start

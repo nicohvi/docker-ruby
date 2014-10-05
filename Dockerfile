@@ -19,5 +19,24 @@ RUN echo 'gem: --no-rdoc --no-ri' > ~/.gemrc && \
     gem install passenger 
 
 # install passenger nginx-module
+RUN 'passenger-install-nginx-module --auto-download --auto --prefix=/etc/nginx'
 
+# add the directory housing our ruby app
+RUN mkdir -p /var/www/nplol/public
+ADD index.html /var/www/nplol/public
 
+# add the user running our apps
+RUN adduser app
+RUN chown -R app /var/www
+run chgrp -R app /var/www
+
+# setup the correct nginx.conf 
+RUN rm -v /etc/nginx/nginx.conf
+ADD nginx.conf /etc/nginx/
+
+# run nginx in the foreground
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+
+EXPOSE 80
+
+ENTRYPOINT nginx

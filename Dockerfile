@@ -22,7 +22,7 @@ RUN echo 'gem: --no-rdoc --no-ri' > ~/.gemrc && \
     gem install passenger 
 
 # install passenger nginx-module
-RUN /bin/bash -l -c 'passenger-install-nginx-module --auto-download --auto --prefix=/etc/nginx'
+RUN /bin/bash -l -c 'passenger-install-nginx-module --auto-download --auto'
 
 # add nginx startup-script
 ADD nginx.sh /etc/init.d/nginx

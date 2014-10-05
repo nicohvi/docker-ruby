@@ -1,6 +1,9 @@
 FROM centos:centos6
 MAINTAINER Nicolay Hvidsten <nicohvi@gmail.com>
 
+
+RUN yum -y install sudo
+
 RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
     yum -y update && \
     yum -y groupinstall "Development Tools" && \
@@ -45,4 +48,4 @@ RUN chown -R app /var/www && chgrp -R app /var/www && \
 
 EXPOSE 80
 
-ENTRYPOINT /etc/init.d/nginx start
+ENTRYPOINT sudo /etc/init.d/nginx start

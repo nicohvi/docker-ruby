@@ -3,6 +3,7 @@ MAINTAINER Nicolay Hvidsten <nicohvi@gmail.com>
 
 
 RUN yum -y install sudo
+RUN  sed -i "s/Defaults    requiretty.*/ #Defaults    requiretty/g" /etc/sudoers
 
 RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
     yum -y update && \

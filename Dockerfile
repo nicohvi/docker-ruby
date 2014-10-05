@@ -33,16 +33,12 @@ RUN mkdir -p /var/www/nplol/public
 ADD index.html /var/www/nplol/public/
 
 # setup the correct nginx.conf 
+USERADD nginx
 ADD nginx.conf /etc/nginx/
 
 # run nginx in the foreground
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-# add the user running our apps
-RUN adduser app
-RUN chown -R app /var/www && chgrp -R app /var/www && \
-    chown -R app /etc/nginx && chgrp -R app /etc/nginx && \
-    chown -R app /etc/init.d
-
 EXPOSE 80
 
+ENTRYPOINT sudo /etc/init.d/nginx start

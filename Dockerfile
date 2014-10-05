@@ -39,4 +39,4 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 EXPOSE 80
 
-ENTRYPOINT nginx
+# ENTRYPOINT nginx

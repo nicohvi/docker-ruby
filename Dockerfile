@@ -1,6 +1,11 @@
 FROM centos:centos6
 MAINTAINER Nicolay Hvidsten <nicohvi@gmail.com>
 
+# install sudp
+RUN yum -y install sudo 
+RUN useradd docker && echo "docker:docker" | chpasswd && adduser docker sudo
+RUN mkdir -p /home/docker && chown -R docker:docker /home/docker
+
 RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
     yum -y update && \
     yum -y groupinstall "Development Tools" && \
@@ -22,7 +27,7 @@ RUN echo 'gem: --no-rdoc --no-ri' > ~/.gemrc && \
     gem install passenger 
 
 # install passenger nginx-module
-RUN /bin/bash -l -c 'passenger-install-nginx-module --auto-download --auto'
+RUN /bin/bash -l -c 'passenger-install-nginx-module --auto-download --auto --prefix=/etc/nginx'
 
 # add nginx startup-script
 ADD nginx.sh /etc/init.d/nginx

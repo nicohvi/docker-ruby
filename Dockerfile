@@ -28,6 +28,9 @@ RUN /bin/bash -l -c 'passenger-install-nginx-module --auto-download --auto --pre
 ADD nginx.sh /etc/init.d/nginx
 RUN chmod +x /etc/init.d/nginx
 
+# add the log directory
+RUN mkdir -p /var/log/nginx
+
 # add the directory housing our ruby app
 RUN mkdir -p /var/www/nplol/public
 ADD index.html /var/www/nplol/public/

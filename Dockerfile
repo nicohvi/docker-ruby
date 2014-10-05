@@ -23,7 +23,7 @@ RUN echo 'gem: --no-rdoc --no-ri' > ~/.gemrc && \
 
 # add the directory housing our ruby app
 RUN mkdir -p /var/www/nplol/public
-ADD index.html /var/www/nplol/public
+ADD index.html /var/www/nplol/public/
 
 # add the user running our apps
 RUN adduser app

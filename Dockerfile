@@ -16,6 +16,9 @@ RUN curl --progress http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.3.tar.gz | 
 RUN echo 'gem: --no-rdoc --no-ri' > ~/.gemrc && \
     gem update --system && \
     gem install bundler && \
+
+# new docker-fil
+
     gem install passenger 
 
 # install passenger nginx-module
@@ -26,8 +29,8 @@ RUN mkdir -p /var/www/nplol/public
 ADD index.html /var/www/nplol/public/
 
 # setup the correct nginx.conf 
-# RUN rm -v /etc/nginx/nginx.conf
-ADD nginx.conf /etc/nginx/
+RUN rm -v /etc/nginx/conf/nginx.conf
+ADD nginx.conf /etc/nginx/conf/
 
 # run nginx in the foreground
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf

@@ -41,7 +41,8 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 # add the user running our apps
 RUN adduser app
 RUN chown -R app /var/www && chgrp -R app /var/www && \
-    chown -R app /etc/nginx && chgrp -R app /etc/nginx
+    chown -R app /etc/nginx && chgrp -R app /etc/nginx && \
+    chown -R app /etc/init.d
 
 EXPOSE 80
 

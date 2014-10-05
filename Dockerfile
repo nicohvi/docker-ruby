@@ -20,7 +20,7 @@ RUN echo 'gem: --no-rdoc --no-ri' > ~/.gemrc && \
 
 # install passenger nginx-module
 RUN mkdir -p /etc/nginx
-RUN 'passenger-install-nginx-module --auto-download --auto --prefix=/etc/nginx'
+RUN /bin/bash -l -c 'passenger-install-nginx-module --auto-download --auto --prefix=/etc/nginx'
 
 # add the directory housing our ruby app
 RUN mkdir -p /var/www/nplol/public

@@ -1,8 +1,6 @@
 FROM centos:centos6
 MAINTAINER Nicolay Hvidsten <nicohvi@gmail.com>
 
-RUN mkdir -p /home/docker && chown -R docker:docker /home/docker
-
 RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
     yum -y update && \
     yum -y groupinstall "Development Tools" && \

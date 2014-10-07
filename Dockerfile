@@ -18,30 +18,32 @@ RUN curl --progress http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.3.tar.gz | 
 
 RUN echo 'gem: --no-rdoc --no-ri' > ~/.gemrc && \
     gem update --system && \
-    gem install bundler && \
-    gem install passenger 
+    gem install bundler
 
-# install passenger nginx-module
-RUN /bin/bash -l -c 'passenger-install-nginx-module --auto-download --auto --prefix=/etc/nginx'
 
-# add nginx startup-script
-ADD nginx.sh /etc/init.d/nginx
-RUN chmod +x /etc/init.d/nginx
+    #gem install passenger 
 
-# add the log directory
-RUN mkdir -p /var/log/nginx
+## install passenger nginx-module
+#RUN /bin/bash -l -c 'passenger-install-nginx-module --auto-download --auto --prefix=/etc/nginx'
 
-# add the directory housing our ruby app
-RUN mkdir -p /var/www/nplol/public
-ADD index.html /var/www/nplol/public/
+## add nginx startup-script
+#ADD nginx.sh /etc/init.d/nginx
+#RUN chmod +x /etc/init.d/nginx
 
-# setup the correct nginx.conf 
-RUN useradd nginx
-ADD nginx.conf /etc/nginx/
+## add the log directory
+#RUN mkdir -p /var/log/nginx
 
-# run nginx in the foreground
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+## add the directory housing our ruby app
+#RUN mkdir -p /var/www/nplol/public
+#ADD index.html /var/www/nplol/public/
 
-EXPOSE 80
+## setup the correct nginx.conf 
+#RUN useradd nginx
+#ADD nginx.conf /etc/nginx/
 
-ENTRYPOINT sudo /etc/init.d/nginx start
+## run nginx in the foreground
+#RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+
+#EXPOSE 80
+
+#ENTRYPOINT sudo /etc/init.d/nginx start

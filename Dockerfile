@@ -1,10 +1,10 @@
 FROM nicohvi/centos
 
 # install ruby dependencies
-RUN yum -y install zlib-devel openssl-devel && \
-    readline-devel ncurses-devel libffi-devel && \
-    libxml2-devel libxslt-devel libcurl-devel && \
-    libicu-devel libyaml-devel && \
+RUN yum -y install zlib-devel openssl-devel \
+    readline-devel ncurses-devel libffi-devel \
+    libxml2-devel libxslt-devel libcurl-devel \
+    libicu-devel libyaml-devel \
     yum clean all
 
 # download ruby source
